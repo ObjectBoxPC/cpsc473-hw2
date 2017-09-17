@@ -54,7 +54,7 @@ function getRandomElement(list) {
 }
 
 function insertHiddenImage(thumbnails) {
-	var imageUrl = 'img/sealions.jpg';
+	var imageUrl = 'img/tacocat.jpg';
 	var randomThumbnail = getRandomElement(thumbnails);
 	var originalImageUrl = randomThumbnail.getAttribute('data-image-url');
 	randomThumbnail.setAttribute('data-image-url-original', originalImageUrl);
