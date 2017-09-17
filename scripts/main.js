@@ -45,6 +45,34 @@ function initializeEvents() {
 	'use strict';
 	var thumbnails = getThumbnailsArray();
 	thumbnails.forEach(addThumbClickHandler);
+	insertHiddenImage(thumbnails);
+}
+
+function getRandomElement(list) {
+	var randomIndex = Math.floor(Math.random() * list.length);
+	return list[randomIndex];
+}
+
+function insertHiddenImage(thumbnails) {
+	var imageUrl = 'img/sealions.jpg';
+	var randomThumbnail = getRandomElement(thumbnails);
+	var originalImageUrl = randomThumbnail.getAttribute('data-image-url');
+	randomThumbnail.setAttribute('data-image-url-original', originalImageUrl);
+	randomThumbnail.setAttribute('data-image-url', imageUrl);
+	randomThumbnail.addEventListener('click', function() {
+		resetThumbnails(thumbnails);
+		insertHiddenImage(thumbnails);
+	});
+}
+
+function resetThumbnails(thumbnails) {
+	thumbnails.forEach(function(thumbnail) {
+		if(thumbnail.hasAttribute('data-image-url-original')) {
+			var originalImageUrl = thumbnail.getAttribute('data-image-url-original');
+			thumbnail.removeAttribute('data-image-url-original');
+			thumbnail.setAttribute('data-image-url', originalImageUrl);
+		}
+	});
 }
 
 initializeEvents();
